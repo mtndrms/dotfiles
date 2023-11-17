@@ -16,7 +16,7 @@ set $mod1 Mod1
 font pango:monospace 8
 
 # Monitors
-exec_always --no-startup-id ~/.screenlayout/dual-monitor.sh
+exec --no-startup-id ~/.screenlayout/dual-monitor.sh
 
 set $firstMonitor HDMI-1
 set $secondMonitor eDP-1
@@ -68,7 +68,7 @@ for_window [urgent=latest] focus
 hide_edge_borders both
 new_window normal
 new_float normal
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 gaps inner 5
 gaps outer 5
 smart_gaps on
@@ -93,7 +93,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# xbacklight
+# brightnessctl 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && $refresh_i3status
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && $refresh_i3status
 
@@ -105,6 +105,7 @@ floating_modifier $mod
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+for_window [class="Steam"] floating enable
 
 # kill focused window
 bindsym $mod+q kill
@@ -177,24 +178,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bar {
-        status_command i3status
-        position bottom 
-}
-bindsym $mod+b bar mode toggle
+client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
 # application shortcuts
 bindsym $mod+Return exec --no-startup-id alacritty;focus
-bindsym $mod+w exec --no-startup-id librewolf;focus
-bindsym $mod+e exec --no-startup-id nautilus;focus
+bindsym $mod+w exec --no-startup-id firefox;focus
+bindsym $mod+e exec --no-startup-id thunar;focus
 bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
 
 # autostart
-exec_always --no-startup-id feh --bg-scale /home/metin/Pictures/Wallpaper/0.jpg
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id feh --bg-scale /home/metin/Pictures/Wallpaper/0.png
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec_always --no-startup-id numlockx on
+exec --no-startup-id numlockx on
+exec_always --no-startup-id ~/.config/polybar/launch.sh 
 
 # keyboard layout
 exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:alt_shift_toggle'
