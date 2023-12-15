@@ -57,8 +57,8 @@ bindsym $mod+Shift+9 move container to workspace 9; workspace 9
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 
 # next/previous workspace
-bindsym Mod1+Tab workspace next
-bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod1+Tab workspace next
+bindsym $mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
 
 # switch to workspace with urgent window automatically
@@ -87,15 +87,16 @@ exec --no-startup-id dex --autostart --environment i3
 # screen before suspend. Use loginctl lock-session to lock your screen.
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# set $refresh_i3status killall -SIGUSR1 i3status
+# add '&& $refresh_i3status'
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # brightnessctl 
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && $refresh_i3status
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
 
 # lock screen
 bindsym $mod+$mod1+l exec i3lock
@@ -147,7 +148,7 @@ bindsym $mod1+Shift+e layout toggle split
 bindsym $mod+space focus mode_toggle
 
 # floating or tiled
-for_window [class="calculator"] floating enable
+for_window [class="galculator"] floating enable
 for_window [class="^Gnome-font-viewer$"] floating enable
 
 # focus the parent container
@@ -181,17 +182,18 @@ bindsym $mod+r mode "resize"
 client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
 # application shortcuts
-bindsym $mod+Return exec --no-startup-id alacritty;focus
+bindsym $mod+Return exec --no-startup-id xfce4-terminal;focus
 bindsym $mod+w exec --no-startup-id firefox;focus
 bindsym $mod+e exec --no-startup-id thunar;focus
 bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
 
 # autostart
-exec --no-startup-id feh --bg-scale /home/metin/Pictures/Wallpaper/0.png
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/0.jpg
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id numlockx on
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec_always --no-startup-id ~/.config/polybar/launch.sh 
 
 # keyboard layout
