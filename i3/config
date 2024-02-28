@@ -11,14 +11,14 @@
 # Print = PRINT key
 # Tab = TAB key
 
-set $mod Mod4
-set $mod1 Mod1
+set $mod Mod1
+set $mod1 Mod4
 font pango:monospace 8
 
 # Monitors
 exec --no-startup-id ~/.screenlayout/dual-monitor.sh
 
-set $firstMonitor HDMI-1
+set $firstMonitor HDMI-1 
 set $secondMonitor eDP-1
 
 workspace 1 output $firstMonitor
@@ -68,11 +68,11 @@ for_window [urgent=latest] focus
 hide_edge_borders both
 new_window normal
 new_float normal
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
 gaps inner 5
-gaps outer 5
-smart_gaps on
-smart_borders on
+gaps outer 3
+# smart_gaps on
+# smart_borders on
 
 # Autotiling
 exec_always --no-startup-id autotiling
@@ -107,6 +107,7 @@ floating_modifier $mod
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 for_window [class="Steam"] floating enable
+for_window [title="^Android Emulator.+:[0-9]+$"] floating enable
 
 # kill focused window
 bindsym $mod+q kill
@@ -148,7 +149,7 @@ bindsym $mod1+Shift+e layout toggle split
 bindsym $mod+space focus mode_toggle
 
 # floating or tiled
-for_window [class="galculator"] floating enable
+for_window [class="Galculator"] floating enable
 for_window [class="^Gnome-font-viewer$"] floating enable
 
 # focus the parent container
@@ -182,14 +183,14 @@ bindsym $mod+r mode "resize"
 client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
 # application shortcuts
-bindsym $mod+Return exec --no-startup-id xfce4-terminal;focus
+bindsym $mod+Return exec --no-startup-id alacritty;focus
 bindsym $mod+w exec --no-startup-id firefox;focus
 bindsym $mod+e exec --no-startup-id thunar;focus
 bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
 
 # autostart
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/0.jpg
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/3.jpg
+exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id numlockx on
@@ -197,5 +198,5 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec_always --no-startup-id ~/.config/polybar/launch.sh 
 
 # keyboard layout
-exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:alt_shift_toggle'
+exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:ctrl_alt_space_toggle'
 
