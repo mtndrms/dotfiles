@@ -11,26 +11,27 @@
 # Print = PRINT key
 # Tab = TAB key
 
-set $mod Mod1
-set $mod1 Mod4
+set $mod Mod4
+set $mod1 Mod1
 font pango:monospace 8
 
 # Monitors
-exec --no-startup-id ~/.screenlayout/dual-monitor.sh
+exec --no-startup-id ~/.screenlayout/triple-monitor.sh
 
-set $firstMonitor HDMI-1 
-set $secondMonitor eDP-1
+set $firstMonitor HDMI-1
+set $secondMonitor DP-1
+set $thirdMonitor eDP-1
 
 workspace 1 output $firstMonitor
 workspace 2 output $firstMonitor
 workspace 3 output $firstMonitor
 workspace 4 output $firstMonitor
-workspace 5 output $firstMonitor
+workspace 5 output $secondMonitor
 workspace 6 output $secondMonitor
 workspace 7 output $secondMonitor
 workspace 8 output $secondMonitor
-workspace 9 output $secondMonitor
-workspace 10 output $secondMonitor
+workspace 9 output $thirdMonitor
+workspace 10 output $thirdMonitor
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -68,7 +69,7 @@ for_window [urgent=latest] focus
 hide_edge_borders both
 new_window normal
 new_float normal
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 gaps inner 5
 gaps outer 3
 # smart_gaps on
@@ -159,7 +160,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+c reload
 # restart i3
 bindsym $mod+Shift+r restart
-# log out 
+# log out
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to log out?' -B 'Yes' 'i3-msg exit'"
 
 # resize window
@@ -182,6 +183,12 @@ bindsym $mod+r mode "resize"
 
 client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
+bar {
+  tray_output eDP-1
+  position bottom
+  status_command i3status ~/.config/i3status/config
+}
+
 # application shortcuts
 bindsym $mod+Return exec --no-startup-id alacritty;focus
 bindsym $mod+w exec --no-startup-id firefox;focus
@@ -190,13 +197,13 @@ bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.
 
 # autostart
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/3.jpg
-exec --no-startup-id picom -b
+# exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id numlockx on
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec_always --no-startup-id ~/.config/polybar/launch.sh 
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # keyboard layout
-exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:ctrl_alt_space_toggle'
+exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:alt_shift_toggle'
 

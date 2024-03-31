@@ -10,7 +10,7 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 
 [window]
 dimensions = { columns = 80, lines = 20 }
-opacity = 0.97
+opacity = 1
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
