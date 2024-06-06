@@ -184,7 +184,7 @@ bindsym $mod+r mode "resize"
 client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
 bar {
-  tray_output eDP-1
+  tray_output eDP-1 
   position bottom
   status_command i3status ~/.config/i3status/config
 }

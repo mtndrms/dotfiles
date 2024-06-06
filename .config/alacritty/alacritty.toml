@@ -3,6 +3,8 @@ import = [
   # "~/.config/alacritty/colorscheme/catppuccin-frappe.toml",
   # "~/.config/alacritty/colorscheme/catppuccin-macchiato.toml",
   "~/.config/alacritty/colorscheme/catppuccin-mocha.toml",
+  # "~/.config/alacritty/colorscheme/tokyo-night.toml",
+  # "~/.config/alacritty/colorscheme/cool-night.toml"
 ]
 
 [env]
@@ -11,6 +13,8 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 [window]
 dimensions = { columns = 80, lines = 20 }
 opacity = 1
+padding.x = 10
+padding.y = 10
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
