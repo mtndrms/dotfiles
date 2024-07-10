@@ -16,7 +16,7 @@ set $mod1 Mod1
 font pango:monospace 8
 
 # Monitors
-exec --no-startup-id ~/.screenlayout/triple-monitor.sh
+exec --no-startup-id ~/.screenlayout/monitor.sh
 
 set $firstMonitor HDMI-1
 set $secondMonitor DP-1
@@ -67,10 +67,10 @@ for_window [urgent=latest] focus
 
 # border control
 hide_edge_borders both
-new_window normal
+new_window pixel 1
 new_float normal
 for_window [class="^.*"] border pixel 1
-gaps inner 5
+gaps inner 6
 gaps outer 3
 # smart_gaps on
 # smart_borders on
@@ -94,13 +94,17 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # brightnessctl 
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5% && notify-send "Brightness: $((($(brightnessctl g) * 100) / 100000))%"
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%- && notify-send "Brightness: $((($(brightnessctl g) * 100) / 100000))%"
 
 # lock screen
-bindsym $mod+$mod1+l exec i3lock
+bindsym $mod+$mod1+l exec --no-startup-id ~/.config/i3/scripts/blur-lock
+#bindsym $mod+$mod1+l exec --no-startup-id i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -161,7 +165,7 @@ bindsym $mod+Shift+c reload
 # restart i3
 bindsym $mod+Shift+r restart
 # log out
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to log out?' -B 'Yes' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to log out?' -B 'Yes' 'i3-msg exit'"
 
 # resize window
 mode "resize" {
@@ -184,7 +188,7 @@ bindsym $mod+r mode "resize"
 client.focused #4c7899 #285577 #ffffff #ffffff #ffffff
 
 bar {
-  tray_output eDP-1 
+  tray_output eDP-1
   position bottom
   status_command i3status ~/.config/i3status/config
 }
@@ -193,16 +197,23 @@ bar {
 bindsym $mod+Return exec --no-startup-id alacritty;focus
 bindsym $mod+w exec --no-startup-id firefox;focus
 bindsym $mod+e exec --no-startup-id thunar;focus
-bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
+# rofi
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+t exec --no-startup-id rofi -show window -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+Shift+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
 # autostart
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/3.jpg
-# exec --no-startup-id picom -b
+exec --no-startup-id sleep 1 && feh --bg-fill ~/Pictures/Wallpaper/0.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id numlockx on
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id picom -b
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # keyboard layout
 exec --no-startup-id setxkbmap -layout 'us,tr' -variant qwerty -option 'grp:alt_shift_toggle'
