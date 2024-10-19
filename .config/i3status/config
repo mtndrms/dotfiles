@@ -1,9 +1,8 @@
 order += "volume master"
-order += "memory"
 order += "cpu_usage"
-order += "disk /"
 order += "wireless wlan0"
 order += "battery 1"
+order += "memory"
 order += "time"
 
 time {
@@ -11,12 +10,12 @@ time {
 }
 
 wireless wlan0 {
-        format_up = "WIFI"
-        format_down = "WIFI"
+        format_up = ""
+        format_down = ""
 }
 
 battery 1 {
-        format = "BATTERY: %percentage"
+        format = "BAT: %percentage"
         format_down = "No battery"
         status_chr = "⚡ CHR"
         status_bat = " BAT"
@@ -28,7 +27,7 @@ battery 1 {
 }
 
 memory {
-        format = "MEMORY: %used/%total"
+        format = "RAM: %used/%total"
         threshold_degraded = "10%"
         format_degraded = "MEMORY: %free"
 }
@@ -37,13 +36,9 @@ cpu_usage {
         format = "CPU: %usage"
 }
 
-disk "/" {
-        format = "DISK: %percentage_used"
-}
-
 volume master {
-        format = "VOLUME: %volume"
-        format_muted = "MUTED: %volume"
+        format = "VOL: %volume"
+        format_muted = "VOL: %volume"
         device = "default"
         mixer = "Master"
         mixer_idx = 0

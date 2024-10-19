@@ -23,6 +23,7 @@ window {
     padding:          10;
     transparency:     "real";
     width:            220px;
+    height:           200px;
     location:         center;
     /*y-offset:       18;*/
     /*x-offset:       850;*/
