@@ -1,19 +1,10 @@
-import = [
-  # "~/.config/alacritty/colorscheme/catppuccin-latte.toml",
-  # "~/.config/alacritty/colorscheme/catppuccin-frappe.toml",
-  # "~/.config/alacritty/colorscheme/catppuccin-macchiato.toml",
-  # "~/.config/alacritty/colorscheme/catppuccin-mocha.toml",
-  "~/.config/alacritty/colorscheme/tokyo-night.toml",
-  # "~/.config/alacritty/colorscheme/horizon-dark.toml"
-]
-
 [env]
 WINIT_X11_SCALE_FACTOR = "1.0"
 TERM = "xterm-256color"
 
 [window]
 dimensions = { columns = 80, lines = 20 }
-opacity = 1
+opacity = 0.9
 padding.x = 10
 padding.y = 10
 
@@ -22,5 +13,9 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
 italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
-
 size = 12
+
+[general]
+import = [
+  "~/.config/alacritty/colorscheme/tokyo-night.toml",
+]
