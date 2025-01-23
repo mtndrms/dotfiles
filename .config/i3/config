@@ -76,7 +76,7 @@ gaps outer 3
 # smart_borders on
 
 # Autotiling
-# exec_always --no-startup-id autotiling
+exec_always --no-startup-id autotiling
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
