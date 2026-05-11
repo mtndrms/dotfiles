@@ -9,9 +9,9 @@ configuration {
 }
 
 * {
-  background: #101010;
-  foreground: #F5F5F5;
-  selected: #202020;
+  background: #1A1B26;
+  foreground: #A9B1D6;
+  selected: #A9B1D633;
 }
 
 * {
@@ -27,8 +27,9 @@ window {
   fullscreen: false;
   width: 500px;
   background-color: @background-color;
-  border-radius: 16px;
-  border: 0px solid;
+  border: 2px;
+  border-color: @selected-color;
+  border-radius: 4px;
   children: [inputbar, listview];
 }
 

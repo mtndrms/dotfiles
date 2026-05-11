@@ -1,6 +1,3 @@
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
-export ANDROID_HOME=~/Programs/Android/Sdk
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
